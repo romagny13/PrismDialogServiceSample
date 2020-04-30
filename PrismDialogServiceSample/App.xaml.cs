@@ -14,7 +14,9 @@ namespace PrismDialogServiceSample
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterDialog<DialogA, DialogAViewModel>();
+            containerRegistry.RegisterDialog<DialogA>();
+            // or
+            // containerRegistry.RegisterDialog<DialogA, DialogAViewModel>();
         }
     }
 }
