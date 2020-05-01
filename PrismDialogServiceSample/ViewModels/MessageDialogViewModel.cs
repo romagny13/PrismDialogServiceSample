@@ -5,13 +5,13 @@ using System;
 
 namespace PrismDialogServiceSample.ViewModels
 {
-    public class DialogAViewModel : BindableBase, IDialogAware
+    public class MessageDialogViewModel : BindableBase, IDialogAware
     {
         private string title;
         private string message;
-        private DelegateCommand closeCommand;
+        private DelegateCommand closeDialogCommand;
 
-        public DialogAViewModel()
+        public MessageDialogViewModel()
         {
             this.title = "Default title";
         }
@@ -28,13 +28,13 @@ namespace PrismDialogServiceSample.ViewModels
             set { SetProperty(ref message, value); }
         }
 
-        public DelegateCommand CloseCommand
+        public DelegateCommand CloseDialogCommand
         {
             get
             {
-                if (closeCommand == null)
-                    closeCommand = new DelegateCommand(ExecuteCloseCommand);
-                return closeCommand;
+                if (closeDialogCommand == null)
+                    closeDialogCommand = new DelegateCommand(ExecuteCloseCommand);
+                return closeDialogCommand;
             }
         }
 
@@ -42,10 +42,10 @@ namespace PrismDialogServiceSample.ViewModels
         {
             var parameters = new DialogParameters
             {
-                {"resultMessage", "Closed with close command"}
+                {"resultMessage", "Closed with CloseDialogCommand" }
             };
 
-            RequestClose(new DialogResult(ButtonResult.Cancel, parameters));
+            RequestClose(new DialogResult(ButtonResult.OK, parameters));
         }
 
         public event Action<IDialogResult> RequestClose;

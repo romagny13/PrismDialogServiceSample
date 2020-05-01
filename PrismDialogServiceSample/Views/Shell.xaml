@@ -9,8 +9,8 @@
         Title="Shell" Height="450" Width="800">
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Content="Show dialog" Command="{Binding ShowDialogCommand}"/>
-            <TextBlock Text="{Binding ResultMessage}" FontSize="16" Margin="5"/>
+            <Button Content="Show Dialog" Command="{Binding ShowDialogCommand}" Width="150" Height="25"/>
+            <TextBlock Text="{Binding ResultMessage}" FontSize="20" Margin="0,10,0,0"/>
         </StackPanel>
     </Grid>
 </Window>

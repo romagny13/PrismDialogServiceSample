@@ -1,10 +1,14 @@
 ﻿using Prism.Commands;
+using Prism.Ioc;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
+using Prism.Unity.Ioc;
+using PrismDialogServiceSample.Views;
 
 namespace PrismDialogServiceSample.ViewModels
 {
-    public class ShellViewModel: BindableBase
+
+    public class ShellViewModel : BindableBase
     {
         private DelegateCommand showDialogCommand;
         private string resultMessage;
@@ -39,9 +43,16 @@ namespace PrismDialogServiceSample.ViewModels
                 { "message", "My message" }
             };
 
-            dialogService.ShowDialog("DialogA", parameters, result =>
+            dialogService.ShowDialog("MessageDialog", parameters, r =>
             {
-                ResultMessage = result.Parameters.GetValue<string>("resultMessage");
+                if (r.Result == ButtonResult.OK)
+                {
+                    ResultMessage = r.Parameters.GetValue<string>("resultMessage");
+                }
+                else
+                {
+                    ResultMessage = "Not closed by user";
+                }
             });
         }
     }
@@ -63,7 +74,7 @@ namespace PrismDialogServiceSample.ViewModels
     //        container.Register<IDialogService, DialogService>();
 
     //        // dialog
-    //        container.RegisterDialog<DialogA, DialogAViewModel>();
+    //        container.RegisterDialog<MessageDialog, MessageDialogViewModel>(); // for custom viewmodel or location
     //    }
 
 
@@ -93,9 +104,16 @@ namespace PrismDialogServiceSample.ViewModels
 
     //        var dialogService = container.Resolve<IDialogService>();
 
-    //        dialogService.ShowDialog("DialogA", parameters, result =>
+    //        dialogService.ShowDialog("MessageDialog", parameters, r =>
     //        {
-    //            ResultMessage = result.Parameters.GetValue<string>("resultMessage");
+    //            if (r.Result == ButtonResult.OK)
+    //            {
+    //                ResultMessage = r.Parameters.GetValue<string>("resultMessage");
+    //            }
+    //            else
+    //            {
+    //                ResultMessage = "Not closed by user";
+    //            }
     //        });
     //    }
     //}
